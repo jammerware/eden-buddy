@@ -87,6 +87,8 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/checkbox
+
 @angular/material/core
 
 @angular/material/divider
@@ -94,6 +96,8 @@ THE SOFTWARE.
 @angular/material/form-field
 
 @angular/material/select
+
+@angular/material/snack-bar
 
 @angular/material/table
 
