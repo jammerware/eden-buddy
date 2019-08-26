@@ -1,4 +1,4 @@
 <div class="copyable-code-component">
     <code>{{code}}</code>
-    <button ngxClipboard [cbContent]="code" mat-raised-button>COPY</button>
+    <button ngxClipboard [cbContent]="code" mat-raised-button (click)="copied()">COPY</button>
 </div>

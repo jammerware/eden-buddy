@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-copyable-code',
@@ -7,9 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CopyableCodeComponent implements OnInit {
     @Input() code: string;
-    constructor() { }
+    constructor(private snackbar: MatSnackBar) { }
 
     ngOnInit() {
     }
 
+    copied() {
+        this.snackbar.open("Copied!", "OK!", {
+            duration: 3000
+        });
+    }
 }

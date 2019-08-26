@@ -6,27 +6,43 @@
         <img class="macro-image" src="https://i.redd.it/0ri5vtgbe2i31.jpg" alt="Macro image" title="Macro image">
         <app-copyable-code [code]="macro"></app-copyable-code>
     </div>
-    <app-role-picker [role]="selectedRole" (roleChange)="selectedRoleChanged($event)"></app-role-picker>
 
-    <div class="mat-typography">
-        <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
-            <ng-container matColumnDef="mechanic">
-                <th mat-header-cell *matHeaderCellDef>Mechanic</th>
-                <td mat-cell *matCellDef="let entry" class="shrink">{{entry.mechanic}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef>Position</th>
-                <td mat-cell *matCellDef="let entry" class="shrink">{{entry.position || '--'}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="notes">
-                <th mat-header-cell *matHeaderCellDef>Notes</th>
-                <td mat-cell *matCellDef="let entry" class="grow">{{entry.notes || '--'}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+    <div class="controls">
+        <app-role-picker [role]="selectedRole" (roleChange)="selectedRoleChanged($event)"></app-role-picker>
+        <mat-checkbox [(ngModel)]="simple" (change)="simpleChanged($event)" labelPosition="before">
+            Only show mechanics that directly affect me
+        </mat-checkbox>
     </div>
+
+    <mat-divider></mat-divider>
+    <p *ngIf="!selectedRole" class="no-role">
+        <em>
+            Choose your role in the dropdown above to get custom help just for you!
+            (And anyone else who picks that exact role. Still though.)
+        </em>
+    </p>
+    <table *ngIf="selectedRole" mat-table [dataSource]="tableData" class="mat-elevation-z8">
+        <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let entry" class="shrink">{{entry.time}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mechanic">
+            <th mat-header-cell *matHeaderCellDef>Mechanic</th>
+            <td mat-cell *matCellDef="let entry" class="shrink">{{entry.mechanic}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Position</th>
+            <td mat-cell *matCellDef="let entry" class="shrink">{{entry.position || '--'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="notes">
+            <th mat-header-cell *matHeaderCellDef>Notes</th>
+            <td mat-cell *matCellDef="let entry" class="grow">{{entry.notes || '--'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>

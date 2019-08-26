@@ -77,6 +77,14 @@ h2 {
     font-weight: lighter;
 }
 
-table th, table td {
-    vertical-align: middle;
+em {
+	font-style: italic;
+}
+
+table {
+	width: 100%;
+
+	th, td {
+		vertical-align: middle;
+	}
 }

@@ -6,6 +6,8 @@ import {
     MatDividerModule,
     MatSelectModule,
     MatTableModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
 } from '@angular/material';
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -18,8 +20,10 @@ import { CopyableCodeComponent } from './components/copyable-code/copyable-code.
 
 const materialModules = [
     MatButtonModule,
+    MatCheckboxModule,
     MatDividerModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatTableModule,
 ];
 
