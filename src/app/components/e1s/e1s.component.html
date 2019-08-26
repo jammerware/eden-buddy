@@ -4,8 +4,9 @@
     <mat-divider></mat-divider>
     <div class="macro-image-container">
         <img class="macro-image" src="https://i.redd.it/0ri5vtgbe2i31.jpg" alt="Macro image" title="Macro image">
+        <app-copyable-code [code]="macro"></app-copyable-code>
     </div>
-    <app-role-picker (roleChange)="selectedRoleChanged($event)"></app-role-picker>
+    <app-role-picker [role]="selectedRole" (roleChange)="selectedRoleChanged($event)"></app-role-picker>
 
     <div class="mat-typography">
         <table mat-table [dataSource]="tableData" class="mat-elevation-z8">

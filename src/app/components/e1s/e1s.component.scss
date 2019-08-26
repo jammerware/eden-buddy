@@ -1,6 +1,15 @@
 .macro-image-container {
-    margin: 2rem auto;
-    text-align: center;
+    display: flex;
+    margin-top: 2rem;
+
+    code {
+        flex-grow: 1;
+    }
+
+    img {
+        display: block;
+        margin-right: 2rem;
+    }
 }
 
 table {

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
 
 @Component({
@@ -7,7 +7,7 @@ import { MatSelectChange } from '@angular/material';
     styleUrls: ['./role-picker.component.scss']
 })
 export class RolePickerComponent {
-    role: string;
+    @Input() role: string;
     @Output() roleChange = new EventEmitter<string>();
 
     selectedRoleChange(event: MatSelectChange) {

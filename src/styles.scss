@@ -59,6 +59,14 @@ html, body {
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+code {
+	background-color: rgb(48, 48, 48);
+	color: #d5d5d5;
+	display: block;
+	font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+	padding: 2rem;
+}
+
 h1 {
     font-size: 2.5rem;
     font-weight: 400;
