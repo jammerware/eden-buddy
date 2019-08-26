@@ -124,7 +124,7 @@
               "devServerTarget": "eden-buddy:serve:production"
             }
           }
-        }
+        },
       }
     }
   },
