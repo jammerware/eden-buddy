@@ -14,7 +14,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { E1sComponent } from './components/e1s/e1s.component';
 import { RolePickerComponent } from './components/role-picker/role-picker.component';
 import { CopyableCodeComponent } from './components/copyable-code/copyable-code.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
@@ -31,7 +30,6 @@ const materialModules = [
 @NgModule({
     declarations: [
         AppComponent,
-        E1sComponent,
         RolePickerComponent,
         CopyableCodeComponent,
         TimelineComponent

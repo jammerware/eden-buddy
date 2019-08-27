@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TimelineComponent } from './components/timeline.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 const routes: Routes = [
     { path: ':timelineId', component: TimelineComponent },

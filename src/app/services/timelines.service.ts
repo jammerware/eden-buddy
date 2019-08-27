@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Timeline } from '../models/timeline';
 import { TimelineEntry } from '../models/timeline-entry';
-import { GeneralLocation, PositionLocation, PositionTagLocation } from '../models/location';
+
+export interface TimelineEventArgs {
+    timelineId: string;
+    positionId: string;
+    excludeLessRelevantEvents?: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
 export class TimelinesService {
@@ -207,22 +212,24 @@ export class TimelinesService {
         return TimelinesService.TIMELINES.find(t => t.id === id);
     }
 
-    getEventsForPosition(timelineId: string, positionId: string): TimelineEntry[] {
-        const timeline = this.get(timelineId);
-        const position = timeline.positions.find(p => p.code.localeCompare(positionId, [], { sensitivity: "base" }));
+    getEvents(args: TimelineEventArgs): TimelineEntry[] {
+        const timeline = this.get(args.timelineId);
+        const position = timeline.positions.find(p => p.code.localeCompare(args.positionId, [], { sensitivity: "base" }));
 
         if (!position) {
-            throw new Error(`Can't find position ${positionId} for timeline "${timelineId}".`);
+            throw new Error(`Can't find position ${args.positionId} for timeline "${args.timelineId}".`);
         }
 
         return timeline.entries.filter(ev => {
-            ev.notes.some(n =>
-                n.positionTags === null && n.positions === null ||
-                n.positions.includes(positionId) ||
-                n.positionTags.some(t => position.tags.includes(t))) ||
+            !!!args.excludeLessRelevantEvents ||
+                ev.notes.some(n =>
+                    n.positionTags === null && n.positions === null ||
+                    n.positions.includes(args.positionId) ||
+                    n.positionTags.some(t => position.tags.includes(t))
+                ) ||
                 ev.locations.some(l =>
-                    this.isGeneralLocation(l) ||
-                    l.positions.includes(positionId) ||
+                    l.positionTags === null && l.positions === null ||
+                    l.positions.includes(args.positionId) ||
                     l.positionTags.some(t => position.tags.includes(t))
                 );
         });
@@ -230,10 +237,5 @@ export class TimelinesService {
 
     private formatMacro(macro: string) {
         return macro.trim();
-    }
-
-    private isGeneralLocation(location: GeneralLocation | PositionLocation | PositionTagLocation): location is GeneralLocation {
-        // TODO: yuck
-        return !!!location["positions"] && !!!location["positionTags"];
     }
 }

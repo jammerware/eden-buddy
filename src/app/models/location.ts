@@ -1,11 +1,5 @@
-export interface GeneralLocation {
+export interface Location {
+    positions?: string[];
+    positionTags?: string[];
     location: string;
-}
-
-export interface PositionTagLocation extends GeneralLocation {
-    positionTags: string[];
-}
-
-export interface PositionLocation extends GeneralLocation {
-    positions: string[];
 }

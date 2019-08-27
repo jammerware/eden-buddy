@@ -1,10 +1,10 @@
 <div class="timeline-component">
-    <h1>Eden's Gate: Resurrection</h1>
-    <h2>Eden Prime (E1S)</h2>
+    <h1>{{timeline.fight.title}}</h1>
+    <h2>{{timeline.fight.boss}} ({{timeline.fight.acronym}})</h2>
     <mat-divider></mat-divider>
     <div class="macro-image-container">
         <img class="macro-image" src="https://i.redd.it/0ri5vtgbe2i31.jpg" alt="Macro image" title="Macro image">
-        <app-copyable-code [code]="macro"></app-copyable-code>
+        <app-copyable-code [code]="timeline.macro"></app-copyable-code>
     </div>
 
     <div class="controls">
