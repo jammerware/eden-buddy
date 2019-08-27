@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { E1sComponent } from './components/e1s/e1s.component';
 import { RolePickerComponent } from './components/role-picker/role-picker.component';
 import { CopyableCodeComponent } from './components/copyable-code/copyable-code.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 const materialModules = [
     MatButtonModule,
@@ -32,7 +33,8 @@ const materialModules = [
         AppComponent,
         E1sComponent,
         RolePickerComponent,
-        CopyableCodeComponent
+        CopyableCodeComponent,
+        TimelineComponent
     ],
     imports: [
         BrowserModule,

@@ -1,4 +1,5 @@
-import { FightTimelineEntry } from './fight-timeline-entry';
+import { TimelineEntry } from './timeline-entry';
+import { Position } from './position';
 
 export class Timeline {
     id: string;
@@ -7,6 +8,7 @@ export class Timeline {
         boss: string;
         acronym: string;
     };
-    entries: FightTimelineEntry[];
-    positions: string[];
+    macro?: string;
+    entries: TimelineEntry[];
+    positions: Position[];
 }
