@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RolesService } from 'src/app/roles.service';
-import { MacrosService } from 'src/app/macros.service';
+import { RolesService } from 'src/app/services/roles.service';
+import { MacrosService } from 'src/app/services/macros.service';
 import { FightTimelineEntry } from 'src/app/models/fight-timeline-entry';
 import { Role } from 'src/app/models/role';
 import { MatCheckboxChange } from '@angular/material';

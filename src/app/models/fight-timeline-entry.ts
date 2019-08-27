@@ -5,6 +5,5 @@ export interface FightTimelineEntry {
     mechanic: string;
     position?: string;
     notes?: string;
-    isImportant?: boolean;
     affectsRoles: Role[];
 }
