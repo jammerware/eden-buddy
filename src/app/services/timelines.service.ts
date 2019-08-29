@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Timeline } from '../models/timeline';
-import { TimelineEntry } from '../models/timeline-entry';
+import { TimelineEvent } from '../models/timeline-event';
+import { Position } from '../models/position';
 
 export interface TimelineEventArgs {
     timelineId: string;
@@ -45,7 +46,7 @@ export class TimelinesService {
                 { code: "t1", name: "Tank 1", tags: ["tank", "melee job"] },
                 { code: "t2", name: "Tank 2", tags: ["tank", "melee job"] },
             ],
-            entries: [
+            events: [
                 {
                     time: "0:07",
                     mechanic: "Eden's Gravity",
@@ -212,7 +213,7 @@ export class TimelinesService {
         return TimelinesService.TIMELINES.find(t => t.id === id);
     }
 
-    getEvents(args: TimelineEventArgs): TimelineEntry[] {
+    getEvents(args: TimelineEventArgs): TimelineEvent[] {
         const timeline = this.get(args.timelineId);
         const position = timeline.positions.find(p => p.code.localeCompare(args.positionId, [], { sensitivity: "base" }));
 
@@ -220,12 +221,12 @@ export class TimelinesService {
             throw new Error(`Can't find position ${args.positionId} for timeline "${args.timelineId}".`);
         }
 
-        return timeline.entries.filter(ev => {
+        return timeline.events.filter(ev => {
             !!!args.excludeLessRelevantEvents ||
                 ev.notes.some(n =>
                     n.positionTags === null && n.positions === null ||
-                    n.positions.includes(args.positionId) ||
-                    n.positionTags.some(t => position.tags.includes(t))
+                    n.positions && n.positions.includes(args.positionId) ||
+                    n.positionTags && n.positionTags.some(t => position.tags.includes(t))
                 ) ||
                 ev.locations.some(l =>
                     l.positionTags === null && l.positions === null ||
@@ -237,5 +238,23 @@ export class TimelinesService {
 
     private formatMacro(macro: string) {
         return macro.trim();
+    }
+
+    public isEventRelevant(args: {
+        position: Position,
+        event: TimelineEvent,
+        includeLessRelevantEvents: boolean,
+    }): boolean {
+        return args.includeLessRelevantEvents ||
+            args.event.notes.some(n =>
+                n.positionTags === null && n.positions === null ||
+                n.positions && n.positions.includes(args.position.code) ||
+                n.positionTags && n.positionTags.some(t => args.position.tags.includes(t))
+            ) ||
+            args.event.locations.some(l =>
+                l.positionTags === null && l.positions === null ||
+                l.positions.includes(args.position.code) ||
+                l.positionTags.some(t => args.position.tags.includes(t))
+            );
     }
 }

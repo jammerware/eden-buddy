@@ -1,11 +1,10 @@
 .macro-image-container {
     display: flex;
-    flex-wrap: wrap;
     margin-top: 2rem;
 
-    code {
+    app-copyable-code {
+        display: block;
         flex-grow: 1;
-        width: 100%;
     }
 
     img {

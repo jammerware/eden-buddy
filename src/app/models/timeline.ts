@@ -1,4 +1,4 @@
-import { TimelineEntry } from './timeline-entry';
+import { TimelineEvent } from './timeline-event';
 import { Position } from './position';
 
 export class Timeline {
@@ -9,6 +9,6 @@ export class Timeline {
         acronym: string;
     };
     macro?: string;
-    entries: TimelineEntry[];
+    events: TimelineEvent[];
     positions: Position[];
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material';
 
 import { TimelinesService } from 'src/app/services/timelines.service';
-import { TimelineEntry } from 'src/app/models/timeline-entry';
+import { TimelineEvent } from 'src/app/models/timeline-event';
 import { Timeline } from 'src/app/models/timeline';
 
 @Component({
@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
     displayedColumns = ['time', 'mechanic', 'position', 'notes'];
     simple = false;
     selectedRole: string;
-    tableData: TimelineEntry[];
+    tableData: TimelineEvent[];
     timeline: Timeline;
 
     constructor(
@@ -25,16 +25,18 @@ export class TimelineComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.activatedRoute.params.subscribe(params => {
-            if (!params.timelineId) {
+        console.log('what is thing', this.activatedRoute);
+        this.activatedRoute.paramMap.subscribe(params => {
+            if (!params.get("timelineId")) {
                 throw new Error("No timelineId in route to TimelineComponent.");
             }
 
-            this.timeline = this.timelinesService.get(params.timelineId);
+            this.timeline = this.timelinesService.get(params.get("timelineId"));
 
-            if (params.role) {
-                this.selectedRole = params.role.toString().toLocaleUpperCase();
-                this.simple = params.simple && params.simple.toString().toLocaleLowerCase() === 'simple';
+            if (params.get("positionId")) {
+                const positionId = params.get("positionId");
+                this.selectedRole = positionId.toLocaleLowerCase();
+                this.simple = params.get("simple") && params.get("simple").toString().toLocaleLowerCase() === 'simple';
                 this.loadData();
             }
         });
@@ -46,11 +48,11 @@ export class TimelineComponent implements OnInit {
             positionId: this.selectedRole,
             excludeLessRelevantEvents: this.simple,
         });
+        console.log('loaded', this.tableData);
     }
 
     simpleChanged(event: MatCheckboxChange) {
         this.loadData();
-        console.log('loading');
     }
 
     selectedRoleChanged(event: string) {

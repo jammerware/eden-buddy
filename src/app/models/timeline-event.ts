@@ -1,7 +1,7 @@
 import { Location } from './location';
 import { Note } from './note';
 
-export interface TimelineEntry {
+export interface TimelineEvent {
     time: string;
     mechanic: string;
     locations?: Location[];
