@@ -24,7 +24,9 @@ export class LocationsPipe implements PipeTransform {
         const typedArg = args[0] as Position;
         const foundLocation = typedValue.find(location => this.timelinesService.isLocationForPosition(location, typedArg));
 
-        if (foundLocation) { return foundLocation.location; }
+        if (foundLocation) {
+            return foundLocation.location;
+        }
         return null;
     }
 }

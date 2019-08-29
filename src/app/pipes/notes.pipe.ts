@@ -8,8 +8,8 @@ export class NotesPipe implements PipeTransform {
     constructor(private timelinesService: TimelinesService) { }
 
     transform(value: any, ...args: any[]): any {
-        if (!value) {
-            return [];
+        if (!value || !value.length) {
+            return null;
         }
 
         if (!Array.isArray(value)) {
@@ -30,7 +30,7 @@ export class NotesPipe implements PipeTransform {
             }
         }
 
-        return notes;
+        return notes.length ? notes : null;
     }
 
     private isNote(note: any): note is Note {

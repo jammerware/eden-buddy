@@ -32,19 +32,21 @@
 
         <ng-container matColumnDef="go-to">
             <th mat-header-cell *matHeaderCellDef>Go to</th>
-            <td mat-cell *matCellDef="let event" class="shrink">{{event.locations | locations:selectedPosition || '--'}}
+            <td mat-cell *matCellDef="let event" class="shrink">
+                <span *ngIf="event.locations | locations:selectedPosition as location; else noLocation">
+                    {{location}}
+                </span>
+                <ng-template #noLocation><span>--</span></ng-template>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="notes">
             <th mat-header-cell *matHeaderCellDef>Notes</th>
             <td mat-cell *matCellDef="let event" class="grow">
-                <ul *ngIf="event.notes | notes:selectedPosition; else noNotes; let notes">
+                <ul *ngIf="event.notes | notes:selectedPosition as notes; else noNotes">
                     <li *ngFor="let note of notes">{{note}}</li>
                 </ul>
-                <ng-template #noNotes>
-                    <span>--</span>
-                </ng-template>
+                <ng-template #noNotes><span>--</span></ng-template>
             </td>
         </ng-container>
 

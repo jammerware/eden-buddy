@@ -35,7 +35,7 @@ export class TimelineComponent implements OnInit {
 
             if (params.get("positionId")) {
                 const positionId = params.get("positionId").toLocaleLowerCase();
-                this.selectedPosition = this.timeline.positions.find(p => p.code === positionId);
+                this.selectedPosition = this.timelinesService.getPosition(this.timeline, positionId);
             }
             else {
                 this.selectedPosition = this.timeline.positions[0];
@@ -54,11 +54,15 @@ export class TimelineComponent implements OnInit {
         });
     }
 
+    private navigate() {
+        this.router.navigateByUrl(`${this.timeline.id}/${this.selectedPosition.code}${this.simple ? '/simple' : ''}`);
+    }
+
     selectedPositionChange(event: string) {
-        this.router.navigateByUrl(`${this.timeline.id}/${this.selectedPosition.code}`);
+        this.navigate();
     }
 
     simpleChanged(event: MatCheckboxChange) {
-        this.loadData();
+        this.navigate();
     }
 }

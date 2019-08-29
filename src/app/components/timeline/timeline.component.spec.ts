@@ -6,10 +6,10 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { TimelineComponent } from './timeline.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { RolePickerComponent } from '../role-picker/role-picker.component';
 import { CopyableCodeComponent } from '../copyable-code/copyable-code.component';
 import { NotesPipe } from 'src/app/pipes/notes.pipe';
 import { ActivatedRouteStub } from 'src/testing/activated-route-stub';
+import { LocationsPipe } from 'src/app/pipes/locations.pipe';
 
 describe('TimelineComponent', () => {
     let activatedRoute = new ActivatedRouteStub();
@@ -20,8 +20,8 @@ describe('TimelineComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 CopyableCodeComponent,
-                RolePickerComponent,
                 TimelineComponent,
+                LocationsPipe,
                 NotesPipe,
             ],
             imports: [

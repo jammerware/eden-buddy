@@ -217,7 +217,7 @@ export class TimelinesService {
 
     getEvents(args: TimelineEventArgs): TimelineEvent[] {
         const timeline = this.get(args.timelineId);
-        const position = timeline.positions.find(p => p.code.localeCompare(args.positionId, [], { sensitivity: "base" }));
+        const position = this.getPosition(timeline, args.positionId);
 
         if (!position) {
             throw new Error(`Can't find position ${args.positionId} for timeline "${args.timelineId}".`);
@@ -230,22 +230,20 @@ export class TimelinesService {
         return macro.trim();
     }
 
+    getPosition(timeline: Timeline, positionId: string): Position {
+        return timeline
+            .positions
+            .find(p => p.code.toLocaleLowerCase() === positionId.toLocaleLowerCase());
+    }
+
     public isEventRelevant(args: {
         position: Position,
         event: TimelineEvent,
         includeLessRelevantEvents: boolean,
     }): boolean {
         return args.includeLessRelevantEvents ||
-            args.event.notes && args.event.notes.some(n =>
-                !!!n.positionTags && !!!n.positions ||
-                n.positions && n.positions.includes(args.position.code) ||
-                n.positionTags && n.positionTags.some(t => args.position.tags.includes(t))
-            ) ||
-            args.event.locations && args.event.locations.some(l =>
-                !!!l.positionTags && !!!l.positions ||
-                l.positions && l.positions.includes(args.position.code) ||
-                l.positionTags && l.positionTags.some(t => args.position.tags.includes(t))
-            );
+            args.event.notes && args.event.notes.some(n => this.isNoteForPosition(n, args.position)) ||
+            args.event.locations && args.event.locations.some(l => this.isLocationForPosition(l, args.position));
     }
 
     public isLocationForPosition(location: Location, position: Position) {
@@ -255,7 +253,8 @@ export class TimelinesService {
     }
 
     public isNoteForPosition(note: Note, position: Position) {
-        return note.positions && note.positions.includes(position.code) ||
+        return !note.positionTags && !note.positions ||
+            note.positions && note.positions.includes(position.code) ||
             note.positionTags && position.tags && note.positionTags.some(t => position.tags.includes(t));
     }
 }
