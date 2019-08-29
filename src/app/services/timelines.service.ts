@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Location } from '../models/location';
+import { Position } from '../models/position';
 import { Timeline } from '../models/timeline';
 import { TimelineEvent } from '../models/timeline-event';
-import { Position } from '../models/position';
+import { Note } from '../models/note';
 
 export interface TimelineEventArgs {
-    timelineId: string;
     positionId: string;
-    excludeLessRelevantEvents?: boolean;
+    timelineId: string;
+    includeLessRelevantEvents: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -30,8 +32,8 @@ export class TimelinesService {
             |               ¦              |                           |
             |               ¦              |                                   |
             |_______________________|______________________|
-            ■ → Spinny Orbs bait    | 
-            |                                      | 
+            ■ → Spinny Orbs bait    |
+            |                                      |
             |                              |
             |                                      | – Intercardinals
             |_______________________|    rotate CW for orbs
@@ -221,19 +223,7 @@ export class TimelinesService {
             throw new Error(`Can't find position ${args.positionId} for timeline "${args.timelineId}".`);
         }
 
-        return timeline.events.filter(ev => {
-            !!!args.excludeLessRelevantEvents ||
-                ev.notes.some(n =>
-                    n.positionTags === null && n.positions === null ||
-                    n.positions && n.positions.includes(args.positionId) ||
-                    n.positionTags && n.positionTags.some(t => position.tags.includes(t))
-                ) ||
-                ev.locations.some(l =>
-                    l.positionTags === null && l.positions === null ||
-                    l.positions.includes(args.positionId) ||
-                    l.positionTags.some(t => position.tags.includes(t))
-                );
-        });
+        return timeline.events.filter(ev => this.isEventRelevant({ position, event: ev, includeLessRelevantEvents: args.includeLessRelevantEvents }));
     }
 
     private formatMacro(macro: string) {
@@ -246,15 +236,26 @@ export class TimelinesService {
         includeLessRelevantEvents: boolean,
     }): boolean {
         return args.includeLessRelevantEvents ||
-            args.event.notes.some(n =>
-                n.positionTags === null && n.positions === null ||
+            args.event.notes && args.event.notes.some(n =>
+                !!!n.positionTags && !!!n.positions ||
                 n.positions && n.positions.includes(args.position.code) ||
                 n.positionTags && n.positionTags.some(t => args.position.tags.includes(t))
             ) ||
-            args.event.locations.some(l =>
-                l.positionTags === null && l.positions === null ||
-                l.positions.includes(args.position.code) ||
-                l.positionTags.some(t => args.position.tags.includes(t))
+            args.event.locations && args.event.locations.some(l =>
+                !!!l.positionTags && !!!l.positions ||
+                l.positions && l.positions.includes(args.position.code) ||
+                l.positionTags && l.positionTags.some(t => args.position.tags.includes(t))
             );
+    }
+
+    public isLocationForPosition(location: Location, position: Position) {
+        return !location.positionTags && !location.positions || // has no positions or tags, i.e. for everyone
+            location.positions && location.positions.includes(position.code) || // is specifically for this position
+            location.positionTags && location.positionTags.some(t => position.tags.includes(t)); // is for a tag that this position has
+    }
+
+    public isNoteForPosition(note: Note, position: Position) {
+        return note.positions && note.positions.includes(position.code) ||
+            note.positionTags && position.tags && note.positionTags.some(t => position.tags.includes(t));
     }
 }

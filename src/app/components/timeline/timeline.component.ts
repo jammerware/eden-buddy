@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material';
 
 import { TimelinesService } from 'src/app/services/timelines.service';
+import { Position } from 'src/app/models/position';
 import { TimelineEvent } from 'src/app/models/timeline-event';
 import { Timeline } from 'src/app/models/timeline';
 
@@ -12,9 +13,9 @@ import { Timeline } from 'src/app/models/timeline';
     styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent implements OnInit {
-    displayedColumns = ['time', 'mechanic', 'position', 'notes'];
+    displayedColumns = ['time', 'mechanic', 'go-to', 'notes'];
+    selectedPosition: Position;
     simple = false;
-    selectedRole: string;
     tableData: TimelineEvent[];
     timeline: Timeline;
 
@@ -25,7 +26,6 @@ export class TimelineComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('what is thing', this.activatedRoute);
         this.activatedRoute.paramMap.subscribe(params => {
             if (!params.get("timelineId")) {
                 throw new Error("No timelineId in route to TimelineComponent.");
@@ -34,28 +34,31 @@ export class TimelineComponent implements OnInit {
             this.timeline = this.timelinesService.get(params.get("timelineId"));
 
             if (params.get("positionId")) {
-                const positionId = params.get("positionId");
-                this.selectedRole = positionId.toLocaleLowerCase();
-                this.simple = params.get("simple") && params.get("simple").toString().toLocaleLowerCase() === 'simple';
-                this.loadData();
+                const positionId = params.get("positionId").toLocaleLowerCase();
+                this.selectedPosition = this.timeline.positions.find(p => p.code === positionId);
             }
+            else {
+                this.selectedPosition = this.timeline.positions[0];
+            }
+
+            this.simple = params.get("simple") && params.get("simple").toString().toLocaleLowerCase() === 'simple';
+            this.loadData();
         });
     }
 
     private loadData() {
         this.tableData = this.timelinesService.getEvents({
             timelineId: this.timeline.id,
-            positionId: this.selectedRole,
-            excludeLessRelevantEvents: this.simple,
+            positionId: this.selectedPosition.code,
+            includeLessRelevantEvents: !this.simple,
         });
-        console.log('loaded', this.tableData);
+    }
+
+    selectedPositionChange(event: string) {
+        this.router.navigateByUrl(`${this.timeline.id}/${this.selectedPosition.code}`);
     }
 
     simpleChanged(event: MatCheckboxChange) {
         this.loadData();
-    }
-
-    selectedRoleChanged(event: string) {
-        this.router.navigateByUrl(`e1s/${event}`);
     }
 }

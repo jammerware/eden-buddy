@@ -18,13 +18,13 @@
     align-items: center;
     margin: 2rem 0 1rem;
 
-    app-role-picker {
+    mat-select {
         display: block;
-        flex-grow: 1;
     }
 
     mat-checkbox {
         display: block;
+        flex-grow: 1;
     }
 }
 
@@ -33,7 +33,7 @@ mat-divider {
     margin: 2rem 0;
 }
 
-.no-role {
+.no-position {
     color: #5d5d5d;
     text-align: center;
 }

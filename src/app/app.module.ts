@@ -5,17 +5,19 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RolePickerComponent } from './components/role-picker/role-picker.component';
 import { CopyableCodeComponent } from './components/copyable-code/copyable-code.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MaterialModule } from './material/material.module';
+import { NotesPipe } from './pipes/notes.pipe';
+import { LocationsPipe } from './pipes/locations.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
-        RolePickerComponent,
         CopyableCodeComponent,
         TimelineComponent,
+        NotesPipe,
+        LocationsPipe,
     ],
     imports: [
         BrowserModule,
