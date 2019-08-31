@@ -1,9 +1,6 @@
-import { Location } from './location';
-import { Note } from './note';
+import { Ability } from './ability';
 
 export interface TimelineEvent {
     time: string;
-    mechanic: string;
-    locations?: Location[];
-    notes?: Note[];
+    ability: Ability;
 }

@@ -50,7 +50,7 @@ export class TimelineComponent implements OnInit {
         this.tableData = this.timelinesService.getEvents({
             timelineId: this.timeline.id,
             positionId: this.selectedPosition.code,
-            includeLessRelevantEvents: !this.simple,
+            includeLessRelevantAbilities: !this.simple,
         });
     }
 

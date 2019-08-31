@@ -1,5 +1,6 @@
 import { TimelineEvent } from './timeline-event';
 import { Position } from './position';
+import { Ability } from './ability';
 
 export class Timeline {
     id: string;
@@ -11,4 +12,5 @@ export class Timeline {
     macro?: string;
     events: TimelineEvent[];
     positions: Position[];
+    abilities: Ability[];
 }

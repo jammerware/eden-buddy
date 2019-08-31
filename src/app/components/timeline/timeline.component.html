@@ -27,13 +27,13 @@
 
         <ng-container matColumnDef="mechanic">
             <th mat-header-cell *matHeaderCellDef>Mechanic</th>
-            <td mat-cell *matCellDef="let event" class="shrink">{{event.mechanic}}</td>
+            <td mat-cell *matCellDef="let event" class="shrink">{{event.ability.name}}</td>
         </ng-container>
 
         <ng-container matColumnDef="go-to">
             <th mat-header-cell *matHeaderCellDef>Go to</th>
             <td mat-cell *matCellDef="let event" class="shrink">
-                <span *ngIf="event.locations | locations:selectedPosition as location; else noLocation">
+                <span *ngIf="event.ability.locations | locations:selectedPosition as location; else noLocation">
                     {{location}}
                 </span>
                 <ng-template #noLocation><span>--</span></ng-template>
@@ -43,7 +43,7 @@
         <ng-container matColumnDef="notes">
             <th mat-header-cell *matHeaderCellDef>Notes</th>
             <td mat-cell *matCellDef="let event" class="grow">
-                <ul *ngIf="event.notes | notes:selectedPosition as notes; else noNotes">
+                <ul *ngIf="event.ability.notes | notes:selectedPosition as notes; else noNotes">
                     <li *ngFor="let note of notes">{{note}}</li>
                 </ul>
                 <ng-template #noNotes><span>--</span></ng-template>
