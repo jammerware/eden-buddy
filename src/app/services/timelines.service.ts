@@ -193,6 +193,39 @@ export class TimelinesService {
                 { positionTags: ["dps"], note: "Stand still! Healers may be coming to give you a Prey marker. Accept it willingly and suffer well." },
             ],
         },
+        {
+            id: "arcane-spheres",
+            name: "Arcane Spheres",
+            locations: [
+                { positions: ["r1"], location: "North (N)" },
+                { positions: ["r2"], location: "East (E)" },
+                { positions: ["h1"], location: "West (W)" },
+                { positions: ["h2"], location: "South (S)" },
+                { positionTags: ["melee job"], location: "Center" },
+            ],
+            notes: [
+                { positionTags: ["ranged job"], note: "Four arcane spheres will spawn around the center of the arena (like Thordan, if you're of that vintage). Murder them - but you'll have to do it while handling the next mechanic... " },
+                { positionTags: ["melee job"], note: "Four arcane spheres will spawn around the center of the arena (like Thordan, if you're of that vintage). Murder them summarily." },
+            ]
+        },
+        {
+            id: "pure-beam-regained",
+            name: "Pure Beam Regained",
+            locations: [
+                { positions: ["r1"], location: "North (N)" },
+                { positions: ["r2"], location: "East (E)" },
+                { positions: ["h1"], location: "West (W)" },
+                { positions: ["h2"], location: "South (S)" },
+            ],
+            notes: [
+                { positionTags: ["ranged job"], note: "An orb with a rotation indicator will appear at your position. It's about to fire a triple beam at you - bait it such that when it rotates from its initial target OUT of the arena. For example, if you're at the east orb and it's rotating clockwise, stand just north of it." }
+            ]
+        },
+        {
+            id: "fragor-maximus-regained",
+            name: "Fragor Maximus (Enrage)",
+            notes: [{ note: "You lost the videogame." }],
+        }
     ];
 
     private static TIMELINES: Timeline[] = [
@@ -252,6 +285,28 @@ export class TimelinesService {
                 { time: "5:16", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-regained-healers") },
                 { time: "5:26", ability: TimelinesService.ABILITIES.find(a => a.id === "spear-of-paradise") },
                 { time: "5:39", ability: TimelinesService.ABILITIES.find(a => a.id === "dimensional-shift") },
+                { time: "5:44", ability: TimelinesService.ABILITIES.find(a => a.id === "arcane-spheres") },
+                { time: "5:45", ability: TimelinesService.ABILITIES.find(a => a.id === "pure-beam-regained") },
+                { time: "6:07", ability: TimelinesService.ABILITIES.find(a => a.id === "pure-light") },
+                { time: "6:18", ability: TimelinesService.ABILITIES.find(a => a.id === "dimensional-shift") },
+                { time: "6:31", ability: TimelinesService.ABILITIES.find(a => a.id === "edens-gravity") },
+                { time: "6:42", ability: TimelinesService.ABILITIES.find(a => a.id === "edens-flare") },
+                { time: "6:54", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-tanks") },
+                { time: "7:04", ability: TimelinesService.ABILITIES.find(a => a.id === "spear-of-paradise") },
+                { time: "7:12", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-dps") },
+                { time: "7:27", ability: TimelinesService.ABILITIES.find(a => a.id === "delta-attack") },
+                { time: "7:38", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-healers") },
+                { time: "7:53", ability: TimelinesService.ABILITIES.find(a => a.id === "dimensional-shift") },
+                { time: "7:59", ability: TimelinesService.ABILITIES.find(a => a.id === "arcane-spheres") },
+                { time: "8:00", ability: TimelinesService.ABILITIES.find(a => a.id === "pure-beam-regained") },
+                { time: "8:22", ability: TimelinesService.ABILITIES.find(a => a.id === "pure-light") },
+                { time: "8:33", ability: TimelinesService.ABILITIES.find(a => a.id === "dimensional-shift") },
+                { time: "8:46", ability: TimelinesService.ABILITIES.find(a => a.id === "edens-gravity") },
+                { time: "8:57", ability: TimelinesService.ABILITIES.find(a => a.id === "edens-flare") },
+                { time: "9:13", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-regained-tanks") },
+                { time: "9:27", ability: TimelinesService.ABILITIES.find(a => a.id === "vv-regained-dps") },
+                { time: "9:42", ability: TimelinesService.ABILITIES.find(a => a.id === "delta-attack-regained") },
+                { time: "9:50", ability: TimelinesService.ABILITIES.find(a => a.id === "fragor-maximus-regained") },
             ],
         }
     ];
