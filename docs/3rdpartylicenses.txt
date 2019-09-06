@@ -93,7 +93,11 @@ THE SOFTWARE.
 
 @angular/material/divider
 
+@angular/material/form-field
+
 @angular/material/select
+
+@angular/material/slider
 
 @angular/material/snack-bar
 
