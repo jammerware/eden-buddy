@@ -1,0 +1,12 @@
+<div class="formatting-bar-component" *ngIf="cheatSheet">
+    <div class="page-titles-container">
+        <h1>{{cheatSheet.encounter.name}} | {{cheatSheet.encounter.bossName}} </h1>
+        <h2>Your cheat sheet</h2>
+    </div>
+    <div class="font-size-container">
+        <mat-label>Font size</mat-label>
+        <mat-slider min="1" max="4" step="0.5" (input)="fontSizeChange($event)" [tickInterval]="1" [thumbLabel]="true">
+        </mat-slider>
+    </div>
+    <button mat-raised-button color="warn">CLEAR ALL</button>
+</div>

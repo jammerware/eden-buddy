@@ -10,6 +10,9 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { MaterialModule } from './material/material.module';
 import { NotesPipe } from './pipes/notes.pipe';
 import { LocationsPipe } from './pipes/locations.pipe';
+import { CheatSheetComponent } from './components/cheat-sheet/cheat-sheet.component';
+import { CheatSheetPhaseComponent } from './components/cheat-sheet-phase/cheat-sheet-phase.component';
+import { FormattingBarComponent } from './components/formatting-bar/formatting-bar.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +21,9 @@ import { LocationsPipe } from './pipes/locations.pipe';
         TimelineComponent,
         NotesPipe,
         LocationsPipe,
+        CheatSheetComponent,
+        FormattingBarComponent,
+        CheatSheetPhaseComponent,
     ],
     imports: [
         BrowserModule,

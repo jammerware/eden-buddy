@@ -1,0 +1,12 @@
+<div class="cheat-sheet-phase-component" *ngIf="phase">
+    <div class="padded-content">
+        <h1 [style.fontSize]="(fontSize$ | async) + 1 + 'rem'">{{phase.name}}</h1>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="padded-content">
+        <ul *ngIf="phase.abilities && phase.abilities.length">
+            <li [style.fontSize]="(fontSize$ | async) + 'rem'" *ngFor="let ability of phase.abilities">{{ability.name}}
+            </li>
+        </ul>
+    </div>
+</div>

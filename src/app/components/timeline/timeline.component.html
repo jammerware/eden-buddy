@@ -8,12 +8,19 @@
     </div>
 
     <div class="controls">
-        <mat-select [(ngModel)]="selectedPosition" (selectionChange)="selectedPositionChange($event)">
-            <mat-option *ngFor="let position of timeline.positions" [value]="position">{{position.name}}</mat-option>
-        </mat-select>
+        <mat-form-field>
+            <mat-label>Which position are you playing?</mat-label>
+            <mat-select name="position" [(ngModel)]="selectedPosition"
+                (selectionChange)="selectedPositionChange($event)">
+                <mat-option *ngFor="let position of timeline.positions" [value]="position">{{position.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="flex-spacer"></div>
         <mat-checkbox [(ngModel)]="simple" (change)="simpleChanged($event)" labelPosition="before">
             Only show mechanics that directly affect me
         </mat-checkbox>
+        <button mat-raised-button color="accent" routerLink="/e1s/cheat-sheet">MY CHEAT SHEET</button>
     </div>
 
     <mat-divider></mat-divider>

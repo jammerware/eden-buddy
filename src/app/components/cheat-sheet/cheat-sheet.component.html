@@ -1,0 +1,7 @@
+<div class="cheat-sheet-component" *ngIf="cheatSheet">
+    <app-formatting-bar [cheatSheet]="cheatSheet"></app-formatting-bar>
+    <mat-divider></mat-divider>
+    <div class="phases-container">
+        <app-cheat-sheet-phase *ngFor="let phase of cheatSheet.phases" [phase]="phase"></app-cheat-sheet-phase>
+    </div>
+</div>

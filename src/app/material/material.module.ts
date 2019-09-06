@@ -7,6 +7,7 @@ import {
     MatTableModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatSliderModule,
 } from '@angular/material';
 
 
@@ -15,6 +16,7 @@ const MATERIAL_MODULES = [
     MatCheckboxModule,
     MatDividerModule,
     MatSelectModule,
+    MatSliderModule,
     MatSnackBarModule,
     MatTableModule,
 ];

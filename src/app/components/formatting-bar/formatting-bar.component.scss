@@ -1,0 +1,8 @@
+.formatting-bar-component {
+    display: flex;
+    justify-items: center;
+
+    .page-titles-container {
+        flex-grow: 1;
+    }
+}

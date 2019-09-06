@@ -65,4 +65,8 @@ export class TimelineComponent implements OnInit {
     simpleChanged(event: MatCheckboxChange) {
         this.navigate();
     }
+
+    toCheatSheet() {
+        this.router.navigateByUrl("/e1s/cheat-sheet");
+    }
 }

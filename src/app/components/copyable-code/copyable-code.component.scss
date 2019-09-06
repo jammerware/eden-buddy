@@ -1,6 +1,10 @@
 .copyable-code-component {
     position: relative;
 
+    code {
+        height: 100%;
+    }
+
     button {
         position: absolute;
         right: 1rem;

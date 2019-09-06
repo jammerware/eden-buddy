@@ -19,11 +19,13 @@ export class TimelinesService {
         {
             id: 'edens-gravity',
             name: "Eden's Gravity",
+            tags: ["raid-wide"],
             notes: [{ positionTags: ["healer"], note: "Raidwide. Shields and heals work. Mitigation doesn't :(" }],
         },
         {
             id: "vv-dps",
             name: "Vice & Virtue (DPS)",
+            tags: ["targeted AoE"],
             locations: [
                 { positions: ["m1"], location: "West (W)" },
                 { positions: ["m2"], location: "South (S)" },
@@ -38,11 +40,13 @@ export class TimelinesService {
         {
             id: "edens-flare",
             name: "Eden's Flare",
+            tags: ["pattern AoE"],
             locations: [{ location: "Inside the boss' hitbox" }],
         },
         {
             id: "vv-tanks",
             name: "Vice & Virtue (Tanks)",
+            tags: ["tankbuster", "targeted AoE"],
             locations: [
                 { positions: ["t1"], location: "Northwest (NW)" },
                 { positions: ["t2"], location: "Northeast (NE)" },
@@ -85,6 +89,7 @@ export class TimelinesService {
         {
             id: "delta-attack",
             name: "Delta Attack",
+            tags: ["pattern AoE", "targeted AoE"],
             locations: [
                 { positions: ["h1"], location: "Southwest (SW) - corner" },
                 { positions: ["h2"], location: "Southeast (SE) - corner" },
@@ -100,17 +105,20 @@ export class TimelinesService {
         {
             id: "pure-light",
             name: "Pure Light",
+            tags: ["pattern AoE"],
             locations: [{ location: "Corner behind the boss" }],
             notes: [{ note: "The boss will jump to the corner from which it's furthest. Be behind the boss when the cast ends - don't touch the walls!" }],
         },
         {
             id: "dimensional-shift",
             name: "Dimensional Shift",
+            tags: ["raid-wide"],
             notes: [{ positionTags: ["healer"], note: "Heavy raid-wide. Heals and shields work. Mitigation doesn't :(" }],
         },
         {
             id: "paradise-lost",
             name: "Paradise Lost",
+            tags: ["targeted AoE"],
             locations: [
                 { positions: ["H1"], location: "West (W)" },
                 { positions: ["H2"], location: "South (S)" },
@@ -127,6 +135,7 @@ export class TimelinesService {
         {
             id: "pure-beam",
             name: "Pure Beam",
+            tags: ["targeted AoE"],
             locations: [
                 { positions: ["h1"], location: "West (W)" },
                 { positions: ["h2"], location: "South (S)" },
@@ -142,17 +151,20 @@ export class TimelinesService {
         {
             id: "fragor-maximus",
             name: "Fragor Maximus",
+            tags: ["raid-wide"],
             notes: [{ positionTags: ["healer"], note: "Raid-wide comet" }],
         },
         {
             id: "paradisal-dive",
             name: "Paradisal Dive",
+            tags: ["raid-wide"],
             locations: [{ location: "South (S)" }],
             notes: [{ note: "Here come the adds. Stack with your group for shields, heals, and mitigation. Be sure to interrupt Mana Boost and cleave down the adds ASA-freaking-P." }],
         },
         {
             id: "vv-regained-tanks",
             name: "Vice & Virtue Regained (Tank)",
+            tags: ["targeted AoE", "stack"],
             locations: [
                 { positions: ["H1", "M1", "R1", "T1"], location: "West (W)" },
                 { positions: ["H2", "M2", "R2", "T2"], location: "East (E)" },
@@ -162,6 +174,7 @@ export class TimelinesService {
         {
             id: "vv-regained-dps",
             name: "Vice & Virtue Regained (DPS)",
+            tags: ["stack", "targeted AoE"],
             locations: [
                 { positions: ["r1", "t1"], location: "Northwest (NW)" },
                 { positions: ["r2", "t2"], location: "Northeast (NE)" },
@@ -173,6 +186,7 @@ export class TimelinesService {
         {
             id: "delta-attack-regained",
             name: "Delta Attack Regained",
+            tags: ["stack"],
             locations: [
                 { positionTags: ["healer", "dps"], location: "South (S)" },
                 { positions: ["t1"], location: "Northwest (NW)" },
@@ -262,6 +276,16 @@ export class TimelinesService {
 
     getAbility(timeline: Timeline, abilityId: string) {
         return timeline.abilities.find(a => a.id === abilityId);
+    }
+
+    getAbilityTags(): string[] {
+        return [
+            "dps check",
+            "pattern AoE",
+            "raid-wide",
+            "tankbuster",
+            "targeted AoE",
+        ];
     }
 
     getEvents(args: TimelineEventArgs): TimelineEvent[] {
