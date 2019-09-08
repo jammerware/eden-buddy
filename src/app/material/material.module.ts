@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatButtonModule,
+    MatCardModule,
     MatDividerModule,
     MatSelectModule,
     MatTableModule,
@@ -10,9 +11,9 @@ import {
     MatSliderModule,
 } from '@angular/material';
 
-
 const MATERIAL_MODULES = [
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDividerModule,
     MatSelectModule,

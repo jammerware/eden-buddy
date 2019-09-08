@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CheatSheetPhase } from 'src/app/models/cheat-sheet-phase';
 import { PrefsService } from 'src/app/services/prefs.service';
-import { pipe, Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
